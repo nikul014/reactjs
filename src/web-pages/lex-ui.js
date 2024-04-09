@@ -16,7 +16,7 @@ const LexUi = (props) => {
         <NavBar />
         <div className="auth-wrapper" style={{ marginTop: "5%" }}>
         <div>
-          {isChatbotOpen && <LexChatbot />}
+            <LexChatbot />
         </div>
         </div>
       </>
