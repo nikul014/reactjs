@@ -7,7 +7,7 @@ const Profile = (props) => {
   const [showPassword, setShowPassword] = useState(true);
   const [userDetails, setUserDetails] = useState({
     username: "Unnati",
-    emailAdd: "unnati@gmail.com",
+    emailAdd: "unnatikapadia97@gmail.com",
     password: "Unnati@123",
   });
   const [visible, setVisible] = useState(true);
