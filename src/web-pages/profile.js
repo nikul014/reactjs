@@ -1,15 +1,19 @@
 import React, { Component, useState } from "react";
-import { Link } from "react-router-dom";
-import Logo from "../logo.svg";
+import Logo from "../assets/login.gif";
 import OtherNavBar from "./other-nav-bar";
+import { Alert } from "reactstrap";
 
 const Profile = (props) => {
   const [showPassword, setShowPassword] = useState(true);
   const [userDetails, setUserDetails] = useState({
-    username: "",
-    emailAdd: "",
-    password: "",
+    username: "Unnati",
+    emailAdd: "unnati@gmail.com",
+    password: "Unnati@123",
   });
+  const [visible, setVisible] = useState(true);
+  const onDismiss = () => setVisible(false);
+
+  const [success, setSuccessMessage] = useState("");
 
   const setPasswordShown = () => {
     setShowPassword(!showPassword);
@@ -19,24 +23,27 @@ const Profile = (props) => {
     setUserDetails((prev) => ({ ...prev, [name]: value }));
   };
 
+  const profileFunction = async (e) => {
+    e.preventDefault();
+    setSuccessMessage("Update successfully")
+  };
+
   const { username, password, emailAdd } = userDetails;
   return (
     <>
       <OtherNavBar />
       <div className="profile-wrapper" style={{ marginTop: "7%" }}>
         <div className="profile-inner">
-          <form>
-            <img
-              src={Logo}
-              alt=""
-              style={{
-                width: "50px",
-                height: "50px",
+          <form onSubmit={profileFunction}>
+          {success && (
+                  <Alert color="success" isOpen={visible} toggle={onDismiss}>
+                    {success} 
+                  </Alert>
+                )}
+          <img width="96" height="96" src="https://img.icons8.com/fluency/96/gender-neutral-user--v1.png" alt="Profile" style={{
                 display: "block",
                 marginLeft: "auto",
-                marginRight: "auto",
-              }}
-            />
+                marginRight: "auto",}}/>
 
             <h3>Personal Details</h3>
             <div className="form-group">
@@ -49,6 +56,7 @@ const Profile = (props) => {
                 onChange={handleChange}
                 name="username"
                 id="username"
+                value={username}
               />
             </div>
             <br></br>
@@ -62,6 +70,7 @@ const Profile = (props) => {
                 onChange={handleChange}
                 name="emailAdd"
                 id="emailAdd"
+                value={emailAdd}
               />
             </div>
             <br></br>
@@ -83,6 +92,7 @@ const Profile = (props) => {
                     ? "https://icons.veryicon.com/png/o/miscellaneous/hekr/action-hide-password.png"
                     : "https://static.thenounproject.com/png/777508-200.png"
                 }
+                style={{marginTop:"-10%", width:"10%"}}
                 onClick={setPasswordShown}
                 className="show-password-icon"
                 alt="show/hide"

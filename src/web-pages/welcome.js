@@ -1,24 +1,27 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../logo.svg";
+import Logo from "../assets/login.gif";
 import { Row, Col } from "reactstrap";
-import NavBar from "./login-reg-nav-bar";
+import NavBar from "./welcome-nav-bar";
+
 
 export default class Welcome extends Component {
+
+
   render() {
     return (
       <>
         <NavBar />
         <div className="auth-wrapper" style={{ marginTop: "5%" }}>
           <Row>
-            <Col md={6}>
+            <Col md={6} style={{textAlign:"center"}}>
               <img
                 src={Logo}
                 alt=""
                 style={{
-                  width: "auto",
-                  height: "auto",
-                  alignItems: "center",
+                  height: "80%",
+                  width:"auto",
+                  margin:"5% 0 0 15%"
                 }}
               />
             </Col>
@@ -47,7 +50,7 @@ export default class Welcome extends Component {
               </div>
             </Col>
           </Row>
-          <div className="container" style={{ marginBottom: "5%" }}>
+          <div className="container" style={{ marginBottom: "5%", marginTop:"5%" }}>
             <Row>
               <Col>
               <div className="card mb-2 shadow p-3 bg-white rounded">
@@ -110,7 +113,8 @@ export default class Welcome extends Component {
               </Col>
             </Row>
           </div>
-          <br></br>
+          <br>
+          </br>
         </div>
       </>
     );

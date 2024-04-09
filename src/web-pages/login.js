@@ -1,14 +1,15 @@
 import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../logo.svg";
+import Logo from "../assets/login.gif";
 import { Row, Col } from "reactstrap";
 import { useHistory } from "react-router";
+import { Alert } from "reactstrap";
 
 const Login = (props) => {
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(true);
   const [userDetails, setUserDetails] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -20,27 +21,27 @@ const Login = (props) => {
     setUserDetails((prev) => ({ ...prev, [name]: value }));
   };
 
-  const { username, password } = userDetails;
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [visible, setVisible] = useState(true);
+  const onDismiss = () => setVisible(false);
+
+  const { email, password } = userDetails;
 
   const loginFun = async (e) => {
     e.preventDefault();
-    // try {
-    //   const user = await Auth.signIn(username, password);
-    //   const email_verified = user.attributes["email"];
-    //   if (email_verified) {
-    //     props.setIsAuthenticated(true);
-    //     props.setUser(user);
-    //     history.push("/homepage");
-    //     localStorage.setItem("username", username);
-    //   }
-    // } catch (error) {
-    //   if (error.message === "Incorrect username or password.") {
-    //     setErrorMessage("Incorrect username or password or not registered");
-    //     history.replace("/login");
-    //   } else {
-    //     history.push("/welcome");
-    //   }
-    // }
+    try {
+      props.setIsAuthenticated(true);
+      history.push("/home");
+      localStorage.setItem("email", email);
+    } catch (error) {
+      if (error.message === "Incorrect email or password.") {
+        setErrorMessage("Incorrect email or password or not registered");
+        history.replace("/login");
+      } else {
+        history.push("/welcome");
+      }
+    }
   };
   return (
     <div className="login-register-overflow">
@@ -64,6 +65,11 @@ const Login = (props) => {
           <div className="auth-wrapper">
             <div className="auth-inner">
               <form onSubmit={loginFun}>
+                {errorMessage && (
+                  <Alert color="danger" isOpen={visible} toggle={onDismiss}>
+                    {errorMessage}
+                  </Alert>
+                )}
                 <h3
                   style={{
                     width: "100%",
@@ -81,8 +87,8 @@ const Login = (props) => {
                     className="form-control"
                     placeholder="Enter email"
                     onChange={handleChange}
-                    name="username"
-                    id="username"
+                    name="email"
+                    id="email"
                   />
                 </div>
                 <br></br>
@@ -111,11 +117,9 @@ const Login = (props) => {
                 </div>
 
                 <br></br>
-                <Link to="/home">
-                  <button type="submit" className="btn btn-block button-style">
-                    Login
-                  </button>
-                </Link>
+                <button type="submit" className="btn btn-block button-style">
+                  Login
+                </button>
                 <p className="forgot-password">
                   New User{" "}
                   <Link to="/register" style={{ color: "var(--primary)" }}>

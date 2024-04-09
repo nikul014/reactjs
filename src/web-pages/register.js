@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../logo.svg";
+import Logo from "../assets/login.gif";
 import { Row, Col } from "reactstrap";
 import { useHistory } from "react-router";
+import { Alert } from "reactstrap";
 
 const Register = (props) => {
   const history = useHistory();
@@ -30,38 +31,43 @@ const Register = (props) => {
 
   const { username, email, password, repassword } = userDetails;
 
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [visible, setVisible] = useState(true);
+  const onDismiss = () => setVisible(false);
+
   const registerFunction = async (e) => {
     e.preventDefault();
-    // try {
-    //   if (password === repassword) {
-    //     await Auth.signUp({
-    //       username: username,
-    //       password: password,
-    //       attributes: {
-    //         email: email,
-    //       },
-    //     });
-    //     const response = await axios.post(
-    //       "https://9mwtisdt71.execute-api.us-east-1.amazonaws.com/create-topic",
-    //       {
-    //         topicName: username,
-    //         emailAddress: email,
-    //       }
-    //     );
-    //     await axios.post(
-    //       "https://9mwtisdt71.execute-api.us-east-1.amazonaws.com/create-subscription",
-    //       {
-    //         topicArn: response.data.TopicArn,
-    //         emailAddress: email,
-    //       }
-    //     );
-    //     history.replace("/welcome");
-    //   } else {
-    //     setErrorMessage("Password and re-password did not matched");
-    //   }
-    // } catch (error) {
-    //   setErrorMessage(error.message);
-    // }
+    try {
+      if (password === repassword) {
+        // await Auth.signUp({
+        //   username: username,
+        //   password: password,
+        //   attributes: {
+        //     email: email,
+        //   },
+        // });
+        // const response = await axios.post(
+        //   "https://9mwtisdt71.execute-api.us-east-1.amazonaws.com/create-topic",
+        //   {
+        //     topicName: username,
+        //     emailAddress: email,
+        //   }
+        // );
+        // await axios.post(
+        //   "https://9mwtisdt71.execute-api.us-east-1.amazonaws.com/create-subscription",
+        //   {
+        //     topicArn: response.data.TopicArn,
+        //     emailAddress: email,
+        //   }
+        // );
+        history.replace("/home");
+      } else {
+        setErrorMessage("Password and re-password did not matched");
+      }
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   };
   return (
     <div className="login-register-overflow">
@@ -84,7 +90,12 @@ const Register = (props) => {
         <Col md={6}>
           <div className="auth-wrapper">
             <div className="auth-inner">
-              <form>
+              <form onSubmit={registerFunction}>
+                {errorMessage && (
+                  <Alert color="danger" isOpen={visible} toggle={onDismiss}>
+                    {errorMessage}
+                  </Alert>
+                )}
                 <div
                   style={{
                     width: "100%",
@@ -171,11 +182,9 @@ const Register = (props) => {
                   />
                 </div>
                 <br></br>
-                <Link to="/home">
-                  <button type="submit" className="btn btn-block button-style">
-                    Register
-                  </button>
-                </Link>
+                <button type="submit" className="btn btn-block button-style">
+                  Register
+                </button>
                 <p className="forgot-password text-right">
                   Already registered{" "}
                   <Link to="/login" style={{ color: "var(--primary)" }}>

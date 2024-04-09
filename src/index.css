@@ -87,7 +87,7 @@ html,
 }
 
 .show-password-icon {
-  margin-top: -4.5%;
+  margin-top: -5%;
   float: right;
   width: 5%;
 }
@@ -145,3 +145,11 @@ html,
   border-radius: 15px;
   transition: all .3s;
 }
+/* 
+.limited-lines {
+  overflow: hidden;
+  text-overflow: 'ellipsis'; 
+  display: '-webkit-box', 
+  web: 3, 
+  WebkitBoxOrient: 'vertical'
+} */

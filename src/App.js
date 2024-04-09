@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
@@ -9,11 +9,11 @@ import Register from "./web-pages/register";
 import Home from "./web-pages/home";
 import JobDetail from "./web-pages/job-detail";
 import Profile from "./web-pages/profile";
+import Bookmark from "./web-pages/bookmark";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
     setSession();
@@ -21,10 +21,7 @@ function App() {
 
   const setSession = async () => {
     try {
-      
       setIsAuthenticated(true);
-      // const user = await Auth.currentAuthenticatedUser();
-      // setUser(user);
     } catch (error) {
       if (error !== "No current user") {
         console.log(error);
@@ -45,9 +42,7 @@ function App() {
                 <Login
                   {...props}
                   isAuthenticated={isAuthenticated}
-                  user={user}
                   setIsAuthenticated={setIsAuthenticated}
-                  setUser={setUser}
                 />
               )}
             />
@@ -59,9 +54,7 @@ function App() {
                 <Home
                   {...props}
                   isAuthenticated={isAuthenticated}
-                  user={user}
                   setIsAuthenticated={setIsAuthenticated}
-                  setUser={setUser}
                 />
               )}
             />
@@ -72,9 +65,7 @@ function App() {
                 <JobDetail
                   {...props}
                   isAuthenticated={isAuthenticated}
-                  user={user}
                   setIsAuthenticated={setIsAuthenticated}
-                  setUser={setUser}
                 />
               )}
             />
@@ -85,13 +76,23 @@ function App() {
                 <Profile
                   {...props}
                   isAuthenticated={isAuthenticated}
-                  user={user}
                   setIsAuthenticated={setIsAuthenticated}
-                  setUser={setUser}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/bookmark"
+              component={(props) => (
+                <Bookmark
+                  {...props}
+                  isAuthenticated={isAuthenticated}
+                  setIsAuthenticated={setIsAuthenticated}
                 />
               )}
             />
             <Route exact path="/" component={Welcome} />
+            <Route exact path="/welcome" component={Welcome} />
           </Switch>
         </div>
       )}
