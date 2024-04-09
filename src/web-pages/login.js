@@ -4,12 +4,14 @@ import Logo from "../assets/login.gif";
 import { Row, Col } from "reactstrap";
 import { useHistory } from "react-router";
 import { Alert } from "reactstrap";
+import axios from "axios";
+import { base_url } from "..";
 
 const Login = (props) => {
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(true);
   const [userDetails, setUserDetails] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -26,21 +28,25 @@ const Login = (props) => {
   const [visible, setVisible] = useState(true);
   const onDismiss = () => setVisible(false);
 
-  const { email, password } = userDetails;
+  const { username, password } = userDetails;
 
   const loginFun = async (e) => {
     e.preventDefault();
     try {
-      props.setIsAuthenticated(true);
+      const response = await axios.get(
+        base_url+"/login-user",
+        {
+          params: {
+            username: username,
+            password: password,
+          },
+        }
+      );
+      console.log("ID",response.data.data.userid)
+      localStorage.setItem("userId", response.data.data.userid);
       history.push("/home");
-      localStorage.setItem("email", email);
     } catch (error) {
-      if (error.message === "Incorrect email or password.") {
-        setErrorMessage("Incorrect email or password or not registered");
-        history.replace("/login");
-      } else {
-        history.push("/welcome");
-      }
+        setErrorMessage(error.message);
     }
   };
   return (
@@ -80,15 +86,16 @@ const Login = (props) => {
                 </h3>
 
                 <div className="form-group">
-                  <label>Email address</label>
+                  <label>Username</label>
                   <input
-                    type="email"
+                    type="text"
                     required
                     className="form-control"
-                    placeholder="Enter email"
+                    placeholder="Enter username"
                     onChange={handleChange}
-                    name="email"
-                    id="email"
+                    name="username"
+                    id="username"
+                    value={username}
                   />
                 </div>
                 <br></br>

@@ -4,6 +4,8 @@ import Logo from "../assets/login.gif";
 import { Row, Col } from "reactstrap";
 import { useHistory } from "react-router";
 import { Alert } from "reactstrap";
+import axios from "axios";
+import { base_url } from "..";
 
 const Register = (props) => {
   const history = useHistory();
@@ -40,28 +42,18 @@ const Register = (props) => {
     e.preventDefault();
     try {
       if (password === repassword) {
-        // await Auth.signUp({
-        //   username: username,
-        //   password: password,
-        //   attributes: {
-        //     email: email,
-        //   },
-        // });
-        // const response = await axios.post(
-        //   "https://9mwtisdt71.execute-api.us-east-1.amazonaws.com/create-topic",
-        //   {
-        //     topicName: username,
-        //     emailAddress: email,
-        //   }
-        // );
-        // await axios.post(
-        //   "https://9mwtisdt71.execute-api.us-east-1.amazonaws.com/create-subscription",
-        //   {
-        //     topicArn: response.data.TopicArn,
-        //     emailAddress: email,
-        //   }
-        // );
-        history.replace("/home");
+        await axios.get(
+          base_url+"/signup-user",
+          {
+            params: {
+              username: username,
+              password: password,
+              firstName: username,
+              lastName: username,
+            },
+          }
+        );
+        history.replace("/login");
       } else {
         setErrorMessage("Password and re-password did not matched");
       }

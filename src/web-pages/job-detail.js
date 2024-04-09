@@ -9,7 +9,6 @@ const JobDetail = (props) => {
   const history = useHistory();
   const [jobLocation, setjobLocation] = useState("");
   const [jobPostId, setJobPostId] = useState("");
-  const [jobSavedPostId, setSavedJobPostId] = useState("1");
   const [jobTitle, setjobTitle] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [jobDescription, setjobDescription] = useState("");
@@ -29,34 +28,6 @@ const JobDetail = (props) => {
     setjobTypeName(localStorage.getItem("jobTypeName"));
     setSiteURL(localStorage.getItem("siteUrl"));
   }, []);
-
-  const bookmarkFunction = async (e) => {
-    console.log("Bookmark")
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        "https://wnuj9tp6n0.execute-api.us-east-1.amazonaws.com/test/job-saved-post-create",
-        {
-          jobSavedPostId: jobSavedPostId,
-          jobPostId: jobPostId,
-          userId: "1",
-          jobTitle: jobTitle,
-          jobDescription: jobDescription,
-          jobType: jobTypeName,
-          jobLocation: jobLocation,
-          time: "Last update 4 minutes",
-          imageURL: imageURL,
-          jobRole: jobRole,
-          siteUrl: siteUrl,
-          salary: salary,
-        }
-      );
-      console.log("resp", response)
-      history.replace("/bookmark");
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
   return (
     <>
       {props.isAuthenticated ? (
@@ -86,18 +57,6 @@ const JobDetail = (props) => {
                     >
                       Apply Now
                     </a>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <button
-                      type="button"
-                      className="btn btn-outline-info"
-                      style={{ float: "right", marginTop: "5%" }}
-                      onClick={bookmarkFunction}
-                    >
-                      Bookmark
-                    </button>
                   </Col>
                 </Row>
               </div>

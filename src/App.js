@@ -10,6 +10,7 @@ import Home from "./web-pages/home";
 import JobDetail from "./web-pages/job-detail";
 import Profile from "./web-pages/profile";
 import Bookmark from "./web-pages/bookmark";
+import LexUi from "./web-pages/lex-ui";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -93,6 +94,7 @@ function App() {
             />
             <Route exact path="/" component={Welcome} />
             <Route exact path="/welcome" component={Welcome} />
+            <Route exact path="/chat" component={LexUi} />
           </Switch>
         </div>
       )}

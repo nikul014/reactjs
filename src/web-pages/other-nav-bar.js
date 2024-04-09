@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import { useHistory } from "react-router";
+import axios from "axios";
+import { base_url } from "..";
 
 const OtherNavBar = (props) => {
   const history = useHistory();
-  
+  const [subscribeText, setSubscribeText] = useState("Subscribe");
   const handleLogOut = (event) => {
     event.preventDefault();
     try {
@@ -15,8 +17,20 @@ const OtherNavBar = (props) => {
     }
   };
 
-  const subscribe = (event) => {
-    event.preventDefault();
+  const subscribe = async () => {
+    try {
+      const response = await axios.get(base_url + "/create-and-broadcast",{
+        params:{
+          action:"subscribe",
+          email:"unnatikapadia97@gmail.com"
+        }
+      });
+
+      setSubscribeText("Subscribed");
+      
+    } catch (err) {
+      console.log("error", err);
+    }
     console.log("Subscribe Successfully");
   };
 
@@ -41,7 +55,7 @@ const OtherNavBar = (props) => {
                 onClick={subscribe}
                 style={{ cursor: "pointer" }}
               >
-                Subscribe
+                {subscribeText}
               </a>
             </li>
             <li className="nav-item">

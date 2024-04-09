@@ -5,9 +5,9 @@ AWS.config.update({
   region: 'us-east-1', // Update with your AWS region
   credentials: new AWS.Credentials(
     {
-        accessKeyId: 'ASIAZI2LIZICNLGMQLUG', // Update with your access key ID
-        secretAccessKey: 'LWfvUu9hClEujCsuiQhSI7gEmxCWJamvtBNIwvad', // Update with your secret access key
-        sessionToken: 'IQoJb3JpZ2luX2VjENL//////////wEaCXVzLXdlc3QtMiJHMEUCIQC9YlN1lRelNyv4WOBLxnrzea5BJWd/bcarGyemnDMU7gIgNwNFPCUBi2n/V89Xx1myfdqsJeVx9LwwOdGjfqTkVCAqsgII+///////////ARAAGgw2Mzc0MjM2MzQ5NDgiDFiN38QBkCwn2ynrQSqGAgoATE5OB2Z+va8Vn8fZVMz4l+hDHtXSwVXkH9OkPaT0yUE5cIsVl8yet2LhfqJ1+6NJe6cq520YiqYD+dCzGDjoTILTFWUatpySN5t1a3VK2dNHHiR/eSMAnpy2Y5B4BufvxDe9hbOjPxm6r0gM7MqInzrYqGbnLVyZ7myroWuvKqXlFsIo5iqy6KzgMlWmUUu5kJ/tqyozw1K4hzsULMuzCQle5XkAaHlyEUn5CTbIjUvnaRDnGwKD+gh5LrhnasLiMIt2fMIIES8gEj/zajqe4UzNTF9ZGMCz/bnS/HnO8uRAXoWiRO3HeMPQnZ7LNwZWXkeI9hpZbiJ57odq4P8IQ3zS5qYwuLzSsAY6nQGp72hWE77/OSB8gLkaV4LnTlqc2ZsyI7Erm2Y7ATYHiJ49iMAtlrnitoCg7yX5RqIL1vlslURZpTjCmEeqCFGrL1tmzT6J2RVrmvYPC00jtv8GsmucFNBspLkM+4lzqLWfQnsY+MQJ9vvHt1GcUYiarHU1RYnwd3ZZk6WV3WVjRjxss5ARNfA3UoxLT0kGh6cwnFJH47qGoxYQp397' // Use the access token as the session token
+        accessKeyId: 'ASIAZI2LIZICDCU2R3H6', // Update with your access key ID
+        secretAccessKey: 'hYaebq98EUDhNLNhp9I5wvAdq+OcLfe9M8kCGut6', // Update with your secret access key
+        sessionToken: 'IQoJb3JpZ2luX2VjEOX//////////wEaCXVzLXdlc3QtMiJHMEUCIQD+a/M1ZN9yHKetj0GLE4xj2p22IQpGQdJ1S1VgVtiXnwIgbxcNhQuQh9l8w1EpHKczTbYjJU+EVMeJ1OWS7JlQJIkqqQIIHhAAGgw2Mzc0MjM2MzQ5NDgiDKpioWqmSHNd01vKXSqGAmBS+Ecu4LORuNYCHQd0eI6JmwkTZgfP5EcjslX1YLbfWWdU9+XdWk1NB4wev6nvnPvbfVYB5F/yKFicN7+e6c5CKCBIkEZ16NjGx95rRnWtHxShVxSKYHp6iTwCGnI0qKbGOjyv7MJSeSomArKE1MDbbRLZz7fppnaXFnrlfTu1XXRHnxtuLsK3M4fPhoz1aOwN4nuR39QW5rowXIbDCU1NZN2Fs9pRrcKpqG7mZlszkwYYAVOBGq02sHgwNKkwFF3OhbMNaQrpgnvZFbJbZswqikT7RsMRoGKv6nxcAsCuSSbW9HX3JjniAym4jo5UM+8ooKnp9O1b4TmkNa0IWlllzPlreiUwh9rWsAY6nQGQnTD8uob4Svl31p2rGxvJP9Z8Ra9TU9onycjPbcbnAJRiokyinGlPIau4YmnU1ePyJQp7E57/PmvqzLcyctdmFbpDeJSOlQQhevcuhFzkyLZAZsJuzgy599hWS+uJpVmnd5SSXvX6QK/3V7XqcRIXhoyPSqiDRAIolYEYvSym9ac/JAt8BxdDne7NPNIy1WvuGREqKeMZz2+SU6Tp' // Use the access token as the session token
     }), // Update with your IAM credentials
 });
 
@@ -67,7 +67,7 @@ const LexChatbot = () => {
           placeholder="Type your message..."
           style={{ width: '100%', padding: '10px', marginTop: '10px' }}
         />
-        <button onClick={sendMessage} style={{ marginTop: '10px' }}>Send</button>
+        <button onClick={sendMessage} style={{ marginTop: '10px' }} className='btn button-style'>Send</button>
       </div>
     </div>
   );
